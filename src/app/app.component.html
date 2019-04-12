@@ -1,0 +1,39 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+  <h2>
+    {{a+b}}
+  </h2>
+  <hr />
+  <button [disabled]="!listo" (click)="haceralgo()">Click</button>
+  <hr/>
+  <input type="text" placeholder="tu nombre" [(ngModel)]="nombre"/>
+  <br/>
+  <input type="text" placeholder="tu nombre" [(ngModel)]="nombre2"/>
+  <br/>
+  {{nombre}},
+  {{nombre2}}
+</div> -->
+<agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<hr/>
+<ul>
+  <ng-container *ngFor="let lugar of lugares">
+      <li *ngIf="lugar.active" >{{lugar.nombre}}</li>
+  </ng-container>
+</ul>
+<ul>
+    <ng-container *ngFor="let lugar of lugares; let i= index" [ngSwitch]="lugar.cercania">
+        <li [ngStyle]="{color: (lugar.active) ? 'black' : 'gray'}" [ngClass]="{numero_par: (i+1)%2 !==0}" [resaltar]="lugar.plan">
+          {{lugar.nombre}} -
+          <span *ngSwitchCase="1" [ngStyle]="{color: 'green'}">Muy cercano</span> 
+          <span *ngSwitchCase="2" [ngStyle]="{color: 'black'}">cercano</span>
+          <span *ngSwitchCase="3" [ngStyle]="{color: 'red'}">Lejano</span>
+        </li>
+    </ng-container>
+  </ul>
+
+
